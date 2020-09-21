@@ -6,15 +6,15 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
         self.image = pygame.image.load("img/grouterW.png")
         self.surf = pygame.Surface((67, 62))
-        self.rect = self.surf.get_rect(center = (200, 450))
+        self.rect = self.surf.get_rect(center=(200, 450))
 
-    def update(self):
+    def move(self):
         keys = pygame.key.get_pressed()
 
         if self.rect.left >= 0:
             if keys[pygame.K_LEFT]:
                 self.rect.move_ip(-7, 0)
-        if self.rect.left <= 430:  # possible bug
+        if self.rect.left <= 430:
             if keys[pygame.K_RIGHT]:
                 self.rect.move_ip(7, 0)
 
