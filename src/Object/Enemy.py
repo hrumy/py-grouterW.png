@@ -14,6 +14,7 @@ class Enemy(pygame.sprite.Sprite):
         if self.rect.bottom > 600:
             self.rect.top = 0
             self.rect.center = (random.randint(30, 370), 0)
+            return True
 
     def draw(self, surface):
         surface.blit(self.image, self.rect)

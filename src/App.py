@@ -13,8 +13,11 @@ FramePerSecond = pygame.time.Clock()
 
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
+font_small = pygame.font.SysFont("Verdana", 20)
+
 
 SPEED = 5
+SCORE = 0
 
 DISPLAYSURF = pygame.display.set_mode((500, 500))
 DISPLAYSURF.fill(WHITE)
@@ -37,20 +40,20 @@ while True:
 
     for event in pygame.event.get():
         if event.type == INC_SPEED:
-            SPEED += 1
+            SPEED += 0.5
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
 
     DISPLAYSURF.blit(background, (0, 0))
-
-    P.move()
-    E.move(SPEED)
+    score = font_small.render(str(SCORE), True, RED)
+    DISPLAYSURF.blit(score, (10, 10))
 
     # moves and draws all sprites
     for entity in all_sprites:
         DISPLAYSURF.blit(entity.image, entity.rect)
-        # entity.move()
+        if entity.move(SPEED):
+            SCORE += 1
 
     if pygame.sprite.spritecollideany(P, enemies):
         DISPLAYSURF.fill(RED)
